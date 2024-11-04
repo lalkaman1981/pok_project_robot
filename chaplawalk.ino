@@ -42,18 +42,30 @@ class CustomServo {
     }
 };
 
-CustomServo* servo0 = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 12);
-CustomServo* servo1 = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2);
+CustomServo* servo0 = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 3); // -8
+CustomServo* servo1 = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 + 3);
 
-CustomServo* servo2 = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2);
-CustomServo* servo3 = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2);
-CustomServo* servo4 = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 + 5);
-CustomServo* servo5 = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 + 5);
-CustomServo* servo6 = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2);
-CustomServo* servo7 = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2);
+CustomServo* servo2 = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2 + 4);
+CustomServo* servo3 = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 + 5);
+CustomServo* servo4 = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 + 4);
+CustomServo* servo5 = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 + 4);
+CustomServo* servo6 = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2 + 2);
+CustomServo* servo7 = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2 + 4);
 
-CustomServo* servo8 = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 + 8);
-CustomServo* servo9 = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 - 5);
+CustomServo* servo8 = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 + 3);
+CustomServo* servo9 = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 + 5);
+// CustomServo* servo0 = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo1 = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2);
+
+// CustomServo* servo2 = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo3 = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo4 = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo5 = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo6 = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo7 = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2);
+
+// CustomServo* servo8 = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2);
+// CustomServo* servo9 = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2);
 
 void defaultPose() {
   // pwm.setPWM(servo0->pinNum, 0, servo0->defaultPosition);
@@ -102,44 +114,44 @@ void setup() {
 
 void chaplaMove(int num) {
   for (int k = 0; k < num; k++){
-    delay(500);
+    delay(1001);
     Serial.println(1);
     servo0->MoveServo(-20, 20);
     servo5->MoveServo(-20, 20); // Stage B
 
-    delay(500);
+    delay(1001);
     Serial.println(2);
     servo3->MoveServo(40, 15); // Stage C
     servo2->MoveServo(-30, 15);
     servo1->MoveServo(-30, 15);
 
-    delay(500);
+    delay(1001);
     Serial.println(3);
     servo5->MoveServo(20, 20); // Stage D
     servo0->MoveServo(20, 20);
     
-    delay(500);
+    delay(1001);
     Serial.println(4);
     servo3->MoveServo(20, 15); // Stage E
     servo8->MoveServo(-20, 15);
     
-    delay(500);
+    delay(1001);
     Serial.println(5);
     servo1->MoveServo(20, 15); // Stage E
     servo6->MoveServo(-20, 15);
 
-    delay(500);
+    delay(1001);
     Serial.println(6);
     servo5->MoveServo(20, 20); // Stage B
     servo0->MoveServo(20, 20);
 
-    delay(500);
+    delay(1001);
     Serial.println(7);
     servo7->MoveServo(30, 15);
     servo8->MoveServo(-40, 15); // Stage C
     servo6->MoveServo(30, 15);
 
-    delay(500);
+    delay(1001);
     Serial.println(8);
     servo5->MoveServo(-20, 20); // Stage B
     servo0->MoveServo(-20, 20);
