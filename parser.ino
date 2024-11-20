@@ -14,10 +14,12 @@ class CustomServo {
     int pinNum = 0;
     int defaultPosition = 0;
     int curPos = 0;
-    CustomServo(int pinNum, int defaultPosition) {
+    bool reverse = false; //2345
+    CustomServo(int pinNum, int defaultPosition, bool reverse = false) { //2345
         this->defaultPosition = defaultPosition;
         this->pinNum = pinNum;
         this->curPos = defaultPosition;
+        this->reverse = false; //2345
     }
 
     void CapitalMoveServo(int where) {
@@ -26,6 +28,10 @@ class CustomServo {
     }
 
     void MoveServo(int shift, int delayNew) {
+
+          if (this->reverse == true) { //2345
+              shift = -1 * shift;
+          }
 
       int maxPos = shift + this->curPos;
 
