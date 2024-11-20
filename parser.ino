@@ -29,10 +29,6 @@ class CustomServo {
 
     void MoveServo(int shift, int delayNew) {
 
-          if (this->reverse == true) { //2345
-              shift = -1 * shift;
-          }
-
       int maxPos = shift + this->curPos;
 
       if (shift >= 0) {
@@ -77,16 +73,16 @@ void setup() {
     
     Wire.setClock(400000);
 
-    servos[9] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 3);
-    servos[10] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 + 3, true);
-    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2 + 4, true);
-    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 + 5);
-    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 + 4);
-    servos[1] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 + 4);
-    servos[2] = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2 + 2);
-    servos[3] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2 + 4, true);
-    servos[4] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 + 3);
-    servos[5] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 + 5);
+    servos[9] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 10);
+    servos[10] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2);
+    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 - 7);
+    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[1] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[2] = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[3] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2);
+    servos[4] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[5] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 - 6);
 
     defaultPose();
 }
@@ -172,11 +168,22 @@ void parseCommand(String command) {
 }
 
 void moveServos() {
-    for (int i = 0; i < NUM_SERVOS; ++i) {
-        if (servos[i] != nullptr && positions[i] != -1) {
-            int angle = map(positions[i], 0, 1000, 150, 500);
-            CustomServo* servo = servos[i];
-            servo->MoveServo(angle - servo->curPos, moveTime / NUM_SERVOS);
-        }
+  for (int i = 0; i < NUM_SERVOS; ++i) {
+    if (servos[i] != nullptr && positions[i] != -1) {
+      CustomServo* servo = servos[i];
+      if (servo->reverse) {
+        positions[i] = 1000 - positions[i];
+      }
+      int angle = map(positions[i], 0, 1000, 150, 500);
+      Serial.println(angle);
+      Serial.println(i);
+      Serial.println("Before:");
+      Serial.println(servo->curPos);
+      servo->MoveServo(angle - servo->curPos, moveTime / NUM_SERVOS);
+      Serial.println("After:");
+      Serial.println(servo->curPos);
     }
+  }
+
+  Serial.println("################");
 }
