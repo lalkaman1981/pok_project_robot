@@ -19,7 +19,7 @@ class CustomServo {
         this->defaultPosition = defaultPosition;
         this->pinNum = pinNum;
         this->curPos = defaultPosition;
-        this->reverse = false; //2345
+        this->reverse = reverse; //2345
     }
 
     void CapitalMoveServo(int where) {
@@ -78,13 +78,13 @@ void setup() {
     Wire.setClock(400000);
 
     servos[9] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 3);
-    servos[10] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 + 3);
-    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2 + 4);
+    servos[10] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 + 3, true);
+    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2 + 4, true);
     servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 + 5);
     servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 + 4);
     servos[1] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 + 4);
     servos[2] = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2 + 2);
-    servos[3] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2 + 4);
+    servos[3] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2 + 4, true);
     servos[4] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 + 3);
     servos[5] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 + 5);
 
