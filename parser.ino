@@ -168,7 +168,7 @@ void parseCommand(String command) {
 void moveServos() {
     for (int i = 0; i < NUM_SERVOS; ++i) {
         if (servos[i] != nullptr && positions[i] != -1) {
-            int angle = map(positions[i], 0, 65536, 150, 500);
+            int angle = map(positions[i], 0, 1000, 150, 500);
             CustomServo* servo = servos[i];
             servo->MoveServo(angle - servo->curPos, moveTime / NUM_SERVOS);
         }
