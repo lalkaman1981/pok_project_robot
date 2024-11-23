@@ -1,7 +1,6 @@
 import time
 import serial
 
-
 def main():
     """
     Main function

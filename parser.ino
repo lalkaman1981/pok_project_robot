@@ -72,18 +72,29 @@ void setup() {
     pwm.setPWMFreq(SERVO_FREQ);
     
     Wire.setClock(400000);
+    bool reverse = false;
 
-    servos[9] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2 - 10);
-    servos[10] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2);
-    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 - 7);
-    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[1] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[2] = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[3] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2);
-    servos[4] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[5] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2 - 6);
+    servos[1] = new CustomServo(15, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[3] = new CustomServo(13, (SERVOMAX + SERVOMIN) / 2);
+    servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 - 6);
+    //
+    servos[6] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2);
+    servos[7] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2);
+    servos[8] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2);
+    //
+    servos[9] = new CustomServo(0, (SERVOMAX + SERVOMIN) / 2 - 10, reverse);
+    servos[10] = new CustomServo(1, (SERVOMAX + SERVOMIN) / 2 - 5, reverse);
+    servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2, reverse);
+    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 - 7, reverse);
+    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 - 5, reverse);
 
+    //
+    servos[14] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2, reverse);
+    servos[15] = new CustomServo(6, (SERVOMAX + SERVOMIN) / 2, reverse);
+    servos[16] = new CustomServo(7, (SERVOMAX + SERVOMIN) / 2, reverse);
+    //
     defaultPose();
 }
 
