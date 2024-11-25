@@ -27,26 +27,29 @@ class CustomServo {
         this->curPos = where;
     }
 
-    void MoveServo(int shift, int delayNew) {
+    void MoveServo(int shift, int time) {
 
-      int maxPos = shift + this->curPos;
+        int maxPos = shift + this->curPos;
 
-      if (shift >= 0) {
-          for (int i = this->curPos; i <= maxPos; i++) {
-              pwm.setPWM(this->pinNum, 0, i);
-              delay(delayNew);
-          }
-      }
+        double delayNew = (time / abs(this->curPos - maxPos)) * 1000;
 
-      else {
-          for (int i = this->curPos; i >= maxPos; i--) {
-              pwm.setPWM(this->pinNum, 0, i);
-              delay(delayNew);
-          }
-      }
-      this->curPos += shift;
+        if (shift >= 0) {
+            for (int i = this->curPos; i <= maxPos; i++) {
+                pwm.setPWM(this->pinNum, 0, i);
+                delayMicroseconds(delayNew);
+            }
+        }
+
+        else {
+            for (int i = this->curPos; i >= maxPos; i--) {
+                pwm.setPWM(this->pinNum, 0, i);
+                delayMicroseconds(delayNew);
+            }
+        }
+        this->curPos += shift;
     }
 };
+
 
 void parseCommand(String command);
 void moveServos();
