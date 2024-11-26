@@ -16,16 +16,14 @@ class CustomServo {
     int curPos = 0;
     bool reverse = false;
     double multiplier = 1.0; // cooc
-    CustomServo(int pinNum, int defaultPosition, bool reverse = false, double multiplier = 1.0) { //cooc
-    bool reverse = false;
-    double multiplier = 1.0; // cooc
-    CustomServo(int pinNum, int defaultPosition, bool reverse = false, double multiplier = 1.0) { //cooc
+    int offset = 0;
+    CustomServo(int pinNum, int defaultPosition, int offset = 0, bool reverse = false, double multiplier = 1.0) { //cooc
         this->defaultPosition = defaultPosition;
         this->pinNum = pinNum;
         this->curPos = defaultPosition;
         this->reverse = reverse; //2345
         this->multiplier = multiplier; // cooc
-        this->multiplier = multiplier; // cooc
+        this->offset = offset;
     }
 
     void CapitalMoveServo(int where) {
@@ -86,21 +84,21 @@ void setup() {
     Wire.setClock(400000);
     bool reverse = false;
 
-    servos[1] = new CustomServo(15, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2 - 5);
+    servos[1] = new CustomServo(15, (SERVOMAX + SERVOMIN) / 2, -5);
+    servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2, -5);
     servos[3] = new CustomServo(13, (SERVOMAX + SERVOMIN) / 2);
-    servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2 - 5);
-    servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2 - 6);
+    servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2, -5);
+    servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2, -6);
     //
     servos[6] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2);
     servos[7] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2);
     servos[8] = new CustomServo(8, (SERVOMAX + SERVOMIN) / 2);
     //
-    servos[9] = new CustomServo(0, (SERVOMAX + SERVOMIN) / 2 - 10, reverse);
-    servos[10] = new CustomServo(1, (SERVOMAX + SERVOMIN) / 2 - 5, reverse);
+    servos[9] = new CustomServo(0, (SERVOMAX + SERVOMIN) / 2, -10, reverse);
+    servos[10] = new CustomServo(1, (SERVOMAX + SERVOMIN) / 2, -5, reverse);
     servos[11] = new CustomServo(2, (SERVOMAX + SERVOMIN) / 2, reverse);
-    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2 - 7, reverse);
-    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2 - 5, reverse);
+    servos[12] = new CustomServo(3, (SERVOMAX + SERVOMIN) / 2, -7, reverse);
+    servos[13] = new CustomServo(4, (SERVOMAX + SERVOMIN) / 2, -5, reverse);
 
     //
     servos[14] = new CustomServo(5, (SERVOMAX + SERVOMIN) / 2, reverse);
@@ -195,10 +193,8 @@ void moveServos() {
     if (servos[i] != nullptr && positions[i] != -1) {
       CustomServo* servo = servos[i];
       if (servo->reverse) {
-        positions[i] = (1000 - ((int) positions[i] * servo->multiplier));
-        positions[i] = (1000 - ((int) positions[i] * servo->multiplier));
+        positions[i] = (1000 - ((int) ((positions[i] + servo->offset) * servo->multiplier));
       }
-      int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
       int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
       Serial.println(angle);
       Serial.println(i);
