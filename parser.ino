@@ -14,12 +14,14 @@ class CustomServo {
     int pinNum = 0;
     int defaultPosition = 0;
     int curPos = 0;
-    bool reverse = false; //2345
-    CustomServo(int pinNum, int defaultPosition, bool reverse = false) { //2345
+    bool reverse = false;
+    double multiplier = 1.0; // cooc
+    CustomServo(int pinNum, int defaultPosition, bool reverse = false, double multiplier = 1.0) { //cooc
         this->defaultPosition = defaultPosition;
         this->pinNum = pinNum;
         this->curPos = defaultPosition;
         this->reverse = reverse; //2345
+        this->multiplier = multiplier; // cooc
     }
 
     void CapitalMoveServo(int where) {
@@ -29,9 +31,11 @@ class CustomServo {
 
     void MoveServo(int shift, int time) {
 
+        if (shift == 0) return;
+
         int maxPos = shift + this->curPos;
 
-        double delayNew = (time / abs(this->curPos - maxPos)) * 1000;
+        double delayNew = (time / abs(shift)) * 1000;
 
         if (shift >= 0) {
             for (int i = this->curPos; i <= maxPos; i++) {
@@ -186,9 +190,9 @@ void moveServos() {
     if (servos[i] != nullptr && positions[i] != -1) {
       CustomServo* servo = servos[i];
       if (servo->reverse) {
-        positions[i] = 1000 - positions[i];
+        positions[i] = (1000 - ((int) positions[i] * servo->multiplier));
       }
-      int angle = map(positions[i], 0, 1000, 150, 500);
+      int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
       Serial.println(angle);
       Serial.println(i);
       Serial.println("Before:");

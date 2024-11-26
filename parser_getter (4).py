@@ -16,4 +16,4 @@ def get_string(filepath):
 
     return output_string
 
-print(get_string(r"./rob_files/No.17 Gangnam Style.rob"))
+print(get_string(r"./rob_files/No.9 Waving.rob"))

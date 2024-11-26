@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boba Interface</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        // Function to handle writing to the file
+        async function writeToFile() {
+            const content = document.getElementById("boba-content").value;
+
+            const response = await fetch("/write", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        // Function to handle compiling and executing
+        async function compileAndRun() {
+            const response = await fetch("/compile", {
+                method: "POST"
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Boba Command Interface</h1>
+
+        <!-- Text area for file content -->
+        <textarea id="boba-content" rows="10" cols="50">{{ content }}</textarea>
+        <br>
+
+        <!-- Buttons -->
+        <button onclick="writeToFile()">Write</button>
+        <button onclick="compileAndRun()">Compile & Run</button>
+    </div>
+</body>
+</html>
