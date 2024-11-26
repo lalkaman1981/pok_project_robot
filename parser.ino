@@ -190,7 +190,7 @@ void moveServos() {
       if (servo->reverse) {
         positions[i] = (1000 - ((int) positions[i] * servo->multiplier));
       }
-      int angle = map(positions[i], 0, 1000, 150, 500);
+      int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
       Serial.println(angle);
       Serial.println(i);
       Serial.println("Before:");
