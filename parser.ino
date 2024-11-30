@@ -38,7 +38,6 @@ class CustomServo {
         int maxPos = shift + this->curPos;
 
         double delayNew = (time / abs(shift)) * 1000;
-        double delayNew = (time / abs(shift)) * 1000;
 
         if (shift >= 0) {
             for (int i = this->curPos; i <= maxPos; i++) {
@@ -70,7 +69,7 @@ int activeServos = 0;
 void defaultPose() {
   for (int i = 0; i < NUM_SERVOS; ++i) {
     if (servos[i] != nullptr) {
-      servos[i]->CapitalMoveServo(servos[i]->defaultPosition);
+      servos[i]->CapitalMoveServo(servos[i]->defaultPosition + servos[i]->offset);
     }
   }
 }
@@ -87,8 +86,8 @@ void setup() {
     servos[1] = new CustomServo(15, (SERVOMAX + SERVOMIN) / 2, -5);
     servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2, -5);
     servos[3] = new CustomServo(13, (SERVOMAX + SERVOMIN) / 2);
-    servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2, -5);
-    servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2, -6);
+    servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2, -5, true);
+    servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2, -4);
     //
     servos[6] = new CustomServo(10, (SERVOMAX + SERVOMIN) / 2);
     servos[7] = new CustomServo(9, (SERVOMAX + SERVOMIN) / 2);
@@ -193,9 +192,11 @@ void moveServos() {
     if (servos[i] != nullptr && positions[i] != -1) {
       CustomServo* servo = servos[i];
       if (servo->reverse) {
-        positions[i] = (1000 - ((int) ((positions[i] + servo->offset) * servo->multiplier));
+        positions[i] = (1000 - ((int) ((positions[i] + servo->offset) * servo->multiplier)));
       }
       int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
+      Serial.print("Num servos: ");
+      Serial.println(NUM_SERVOS);
       Serial.println(angle);
       Serial.println(i);
       Serial.println("Before:");
@@ -205,6 +206,6 @@ void moveServos() {
       Serial.println(servo->curPos);
     }
   }
-
+  Serial.println("################");
   Serial.println("################");
 }
