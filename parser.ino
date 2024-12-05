@@ -62,8 +62,8 @@ void moveServos();
 
 CustomServo* servos[NUM_SERVOS];
 int positions[NUM_SERVOS];
-unsigned long moveTime = 500;
-unsigned long delayTime = 500;
+unsigned long moveTime = 0;
+unsigned long delayTime = 0;
 int activeServos = 0;
 
 void defaultPose() {
@@ -84,8 +84,8 @@ void setup() {
     bool reverse = false;
 
     servos[1] = new CustomServo(15, (SERVOMAX + SERVOMIN) / 2, -5);
-    servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2, -5);
-    servos[3] = new CustomServo(13, (SERVOMAX + SERVOMIN) / 2);
+    servos[2] = new CustomServo(14, (SERVOMAX + SERVOMIN) / 2, -5, true);
+    servos[3] = new CustomServo(13, (SERVOMAX + SERVOMIN) / 2, 0, true);
     servos[4] = new CustomServo(12, (SERVOMAX + SERVOMIN) / 2, -5, true);
     servos[5] = new CustomServo(11, (SERVOMAX + SERVOMIN) / 2, -4);
     //
@@ -123,8 +123,8 @@ void loop() {
 
 void parseCommand(String command) {
 
-    moveTime = 500;
-    delayTime = 500;
+    moveTime = 0;
+    delayTime = 0;
 
     for (int i = 0; i < NUM_SERVOS; i++) {
         positions[i] = -1;
