@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <vector>
+#include "HardwareSerial.h"
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -75,7 +76,8 @@ void defaultPose() {
 }
 
 void setup() {
-    Serial.begin(9600);
+    Serial.setRxBufferSize(2024); // Increase buffer size to 1024 bytes
+    Serial.begin(19200);
 
     pwm.begin();
     pwm.setPWMFreq(SERVO_FREQ);
@@ -192,9 +194,9 @@ void moveServos() {
     if (servos[i] != nullptr && positions[i] != -1) {
       CustomServo* servo = servos[i];
       if (servo->reverse) {
-        positions[i] = (1000 - ((int) ((positions[i] + servo->offset) * servo->multiplier)));
+        positions[i] = (1000 - ((int) ((positions[i]) * servo->multiplier)));
       }
-      int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, 150, 500);
+      int angle = map(((int) positions[i] * servo->multiplier), 0, 1000, SERVOMIN, SERVOMAX);
       Serial.print("Num servos: ");
       Serial.println(NUM_SERVOS);
       Serial.println(angle);
