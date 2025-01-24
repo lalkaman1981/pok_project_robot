@@ -22,3 +22,6 @@ because your robot might have different properties);
 esp32s3: there is firmware for esp32-s3, pca9685 and sd card. There is a parser which can process strings to move servo motors on pca.
 This parser read file ('fl.ns') with names of files with algorithms. You need to create file and write its name in 'fl.ns'. Syntax of parser
 is described in ou overleaf
+
+
+Link for the final presentation: https://www.canva.com/design/DAGY-ikruao/bg3jPskFeTuVDdUXPB4FtA/edit
