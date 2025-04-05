@@ -2,7 +2,8 @@
 #include <Adafruit_PWMServoDriver.h>
 #include <vector>
 #include "HardwareSerial.h"
-
+// ESP32S3 Dev Module - Board in Arduino IDE
+// esp32 by Espressif Systems 3.2.0
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 #define SERVOMIN  150
